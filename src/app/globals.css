@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-	background-color: #060709;
+	background-color: #14151a;
+	color: white;
 }
 
 .blob {

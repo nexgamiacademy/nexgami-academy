@@ -7,7 +7,7 @@ import PrimaryButton from './PrimaryButton';
 
 const Card = ({ course }: any) => {
 	return (
-		<div key={course.id} className="rounded-md overflow-hidden flex flex-col w-[400px] mx-auto">
+		<div key={course.id} className="rounded-md overflow-hidden flex flex-col w-full mx-auto">
 			<div className="w-full">
 				<Image className="w-full" src={course.image} alt="Course banner" />
 			</div>

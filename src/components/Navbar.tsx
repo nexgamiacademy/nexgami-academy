@@ -7,26 +7,31 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
 import LanguageIcon from '@mui/icons-material/Language';
 import { Button, IconButton } from '@mui/material';
+import Link from 'next/link';
 
 const Navbar = () => {
 	return (
-		<nav className="flex items-center justify-between p-3 bg-base-200 text-white">
+		<nav className="flex items-center justify-between p-3 bg-base-200 text-white sticky top-0 z-20">
 			<ul className="flex items-center gap-8">
-				<li className="flex items-center gap-2">
-					<Image className="h-10 w-10" src={logo} alt="NexGami" />
-					<div className="flex flex-col text-sm leading-4">
-						<p>NexGami</p>
-						<p className="pl-2">Academy</p>
-					</div>
-				</li>
+				<Link href={'/'}>
+					<li className="flex items-center gap-2">
+						<Image className="h-10 w-10" src={logo} alt="NexGami" />
+						<div className="flex flex-col text-sm leading-4">
+							<p>NexGami</p>
+							<p className="pl-2">Academy</p>
+						</div>
+					</li>
+				</Link>
 
 				<li className="flex">
 					<p>Articles</p>
 					<ArrowDropDownIcon />
 				</li>
-				<li className="flex">
-					<p>Courses</p>
-					<ArrowDropDownIcon />
+				<li>
+					<Link href={'/courses'} className="flex">
+						<p>Courses</p>
+						<ArrowDropDownIcon />
+					</Link>
 				</li>
 				<li className="flex">
 					<p>Learn & Earn</p>

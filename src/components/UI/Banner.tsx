@@ -28,7 +28,7 @@ const Banner = () => {
 				<div className="flex flex-col gap-4">
 					<p>How to Read the Most Popular Crypto Candlestick Patterns</p>
 					<DateNTime />
-					<DifficultyChip />
+					<DifficultyChip difficulty="Beginner" />
 				</div>
 			</div>
 		</section>
