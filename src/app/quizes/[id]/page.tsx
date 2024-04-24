@@ -9,8 +9,8 @@ import PrimaryButton from '@/components/UI/PrimaryButton';
 
 const QuizPage = () => {
 	return (
-		<div className="py-10">
-			<div className="flex w-full justify-center">
+		<div className="py-10 gameBg h-screen bg-[url('../../public/gameBg.png')] bg-cover bg-center">
+			<div className="flex w-full justify-center gap-2">
 				<Typography variant="h4" fontWeight={700} align="center">
 					Answer the questions Correctly to earn exciting rearwards
 				</Typography>
