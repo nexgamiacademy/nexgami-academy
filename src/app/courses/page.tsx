@@ -8,6 +8,7 @@ import PrimaryButton from '@/components/UI/PrimaryButton';
 import DateNTime from '@/components/Shared/DateNTime';
 import DifficultyChip from '@/components/Shared/DifficultyChip';
 import { dummyCourses } from '@/utils/shared';
+import Link from 'next/link';
 
 const CoursesPage = () => {
 	return (
@@ -22,7 +23,9 @@ const CoursesPage = () => {
 					<Typography variant="body1" sx={{ margin: '1rem 0' }}>
 						Get to know about NexGami, the next generation of web3 gaming. Complete short courses, crack quizes and earn exciting rewards!
 					</Typography>
-					<PrimaryButton>Get Started</PrimaryButton>
+					<Link href={'/quizes/1'}>
+						<PrimaryButton>Get Started</PrimaryButton>
+					</Link>
 				</div>
 
 				<div>
@@ -52,7 +55,9 @@ const CoursesPage = () => {
 								</div>
 								<DifficultyChip difficulty="Intermediate" variant="bgless" color="white" />
 								<div>
-									<PrimaryButton>Start Learning</PrimaryButton>
+									<Link href={'/quizes/1'}>
+										<PrimaryButton>Start Learning</PrimaryButton>
+									</Link>
 								</div>
 							</div>
 						</div>
