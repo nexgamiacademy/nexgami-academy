@@ -20,7 +20,7 @@ const Quiz = () => {
 
 	return (
 		<div className="flex flex-col items-center gap-6">
-			<Typography variant="h4" fontWeight={700} align="center">
+			<Typography variant="h4" fontWeight={700} align="center" sx={{ fontSize: { xs: '22px', lg: '2.125rem' } }}>
 				Which of the following best describes NexGami as an organization?
 			</Typography>
 			<CircularProgressWithLabel value={35} />
@@ -28,7 +28,7 @@ const Quiz = () => {
 				{quizOptions.map((option, index) => (
 					<Box
 						key={option}
-						className={`border ${index == selected ? 'border-primary bg-primary text-black' : 'border-white'} rounded-xl px-10 py-5 cursor-pointer`}
+						className={`border ${index == selected ? 'border-primary bg-primary text-black' : 'border-white'} rounded-xl px-10 py-5 cursor-pointer col-span-2 xl:col-span-1`}
 						sx={{
 							boxShadow: '0 0 10px white',
 							'&:hover': {

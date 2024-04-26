@@ -23,31 +23,31 @@ const Navbar = () => {
 					</li>
 				</Link>
 
-				<li className="flex">
+				<li className="xl:flex hidden">
 					<p>Articles</p>
 					<ArrowDropDownIcon />
 				</li>
-				<li>
+				<li className="">
 					<Link href={'/courses'} className="flex">
 						<p>Courses</p>
 						<ArrowDropDownIcon />
 					</Link>
 				</li>
-				<li className="flex">
+				<li className="xl:flex hidden">
 					<p>Learn & Earn</p>
 					<ArrowDropDownIcon />
 				</li>
-				<li className="flex">
+				<li className="xl:flex hidden">
 					<p>Partnership</p>
 					<ArrowDropDownIcon />
 				</li>
-				<li className="flex">
+				<li className="xl:flex hidden">
 					<p>Study Week</p>
 					<ArrowDropDownIcon />
 				</li>
 			</ul>
 
-			<ul className="flex items-center gap-7">
+			<ul className="xl:flex items-center gap-2 xl:gap-7 hidden">
 				<li>
 					<IconButton>
 						<SearchIcon htmlColor="white" />
@@ -55,7 +55,7 @@ const Navbar = () => {
 				</li>
 
 				<li>
-					<p>Log In</p>
+					<p className="text-xs xl:text-base">Log In</p>
 				</li>
 				<li>
 					<Button
@@ -63,6 +63,7 @@ const Navbar = () => {
 						variant="contained"
 						sx={{
 							textTransform: 'capitalize',
+							fontSize: { xs: '8px', xl: '12px' },
 						}}>
 						Register
 					</Button>

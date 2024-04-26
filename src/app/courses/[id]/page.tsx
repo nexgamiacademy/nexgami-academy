@@ -5,7 +5,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 const CoursePage = () => {
 	return (
-		<div className="px-20 mb-20">
+		<div className="px-4 xl:px-20 mb-20">
 			<div className="w-full flex items-center justify-center mt-10">
 				<iframe
 					width="850"
@@ -40,7 +40,7 @@ const CoursePage = () => {
 				</Typography>
 
 				<div className="grid grid-cols-3 items-center justify-between w-full py-8">
-					<div className="flex items-center gap-3">
+					<div className="flex items-center xl:justify-start justify-center gap-3 col-span-3 xl:col-span-1">
 						<Image
 							className="size-16 rounded-full object-cover object-top"
 							src={
@@ -59,7 +59,7 @@ const CoursePage = () => {
 						</div>
 					</div>
 
-					<div className="flex flex-col gap-2 justify-center items-center border-x">
+					<div className="flex flex-col gap-2 justify-center items-center xl:border-x col-span-3 xl:col-span-1 my-8 xl:my-0">
 						<div className="flex items-center gap-3">
 							<div>{[1, 2, 3, 4, 5].map((index) => (index < 5 ? <StarIcon key={index} htmlColor="#FDA43C" /> : <StarBorderIcon key={index} htmlColor="#FDA43C" />))}</div>
 							<Typography variant="body1">(9,643 reviews)</Typography>
@@ -67,7 +67,7 @@ const CoursePage = () => {
 						<Typography variant="body1">14,233 students found this helpful</Typography>
 					</div>
 
-					<Typography variant="body1" textAlign="center" className="hover:underline cursor-pointer font-semibold">
+					<Typography variant="body1" textAlign="center" className="underline xl:no-underline  hover:xl:underline cursor-pointer font-semibold col-span-3 xl:col-span-1">
 						Learn More About This Course
 					</Typography>
 				</div>

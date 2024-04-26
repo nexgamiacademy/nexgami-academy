@@ -34,7 +34,7 @@ export default function Home() {
 	return (
 		<main className="text-white relative overflow-hidden">
 			{/* blob on background top right */}
-			<div className="blob"></div>
+			<div className="blob size-11 xl:size-[650px]"></div>
 
 			<Banner />
 
@@ -55,25 +55,23 @@ export default function Home() {
 						<Card key={course.id} course={course} />
 					))}
 				</div>
-				<div className="cursor-pointer underline font-semibold text-primary my-3 text-end col-span-12 mr-20">Show All Courses</div>
+				<div className="cursor-pointer underline font-semibold text-primary my-3 text-end col-span-12 mr-4 xl:mr-20">Show All Courses</div>
 
-				<section className="flex justify-between mx-20 my-20 bg-[#0C0E11] p-10 rounded-xl">
-					<div className="w-[760px] flex flex-col gap-5">
-						<Typography variant="h3" fontWeight={700} lineHeight={1.25}>
+				<section className="flex flex-col gap-6 xl:flex-row justify-between mx-4 my-10 xl:mx-20 xl:my-20 bg-[#0C0E11] p-10 rounded-xl">
+					<div className="xl:w-[760px] flex flex-col gap-6">
+						<Typography variant="h5" fontWeight={700} lineHeight={1.25} className="text-3xl xl:text-5xl leading-snug">
 							Earn Crypto Through Learning about <span className="text-primary">NexGami</span>
 						</Typography>
-						<Typography variant="h6" color={'lightgray'} lineHeight={1.65}>
+						<Typography variant="h6" color={'lightgray'} lineHeight={1.65} className="text-sm xl:text-lg">
 							Build your blockchain knowledge, complete quizzes, and earn free crypto.{' '}
 						</Typography>
 					</div>
 					<Image src={rewardBanner} alt="earn exciting rewards" />
 				</section>
 
-				<section className="m-20">
-					<div className="flex items-center gap-5">
-						<Typography variant="h6" sx={{ width: '100px' }}>
-							Topics :
-						</Typography>
+				<section className="mx-4 xl:m-20">
+					<div className="flex items-start gap-5">
+						<p className="text-nowrap">Topics :</p>
 						<div className="flex flex-wrap gap-3">
 							{keywords.map((keyword) => (
 								<Button variant="outlined" color="inherit" size="small" className="" key={keyword}>
@@ -83,9 +81,9 @@ export default function Home() {
 						</div>
 					</div>
 
-					<div className="flex items-center gap-5 mt-7">
-						<Typography variant="h6">Difficuly :</Typography>
-						<div className="flex items-center gap-3">
+					<div className="flex items-start xl:items-center gap-5 mt-7">
+						<p className="text-nowrap">Difficuly :</p>
+						<div className="flex flex-wrap items-center gap-3">
 							{['Beginner', 'Intermediate', 'Advanced'].map((difficulty: any) => (
 								<DifficultyChip difficulty={difficulty} variant="contained" key={difficulty} />
 							))}
