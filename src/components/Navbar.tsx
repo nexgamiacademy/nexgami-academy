@@ -23,28 +23,28 @@ const Navbar = () => {
 					</li>
 				</Link>
 
-				<li className="xl:flex hidden">
+				<Link href={'/courses'} className="xl:flex hidden">
 					<p>Articles</p>
 					<ArrowDropDownIcon />
-				</li>
+				</Link>
 				<li className="">
 					<Link href={'/courses'} className="flex">
 						<p>Courses</p>
 						<ArrowDropDownIcon />
 					</Link>
 				</li>
-				<li className="xl:flex hidden">
+				<Link href={`/courses`} className="xl:flex hidden">
 					<p>Learn & Earn</p>
 					<ArrowDropDownIcon />
-				</li>
-				<li className="xl:flex hidden">
+				</Link>
+				<Link href={`/partners`} className="xl:flex hidden">
 					<p>Partnership</p>
 					<ArrowDropDownIcon />
-				</li>
-				<li className="xl:flex hidden">
+				</Link>
+				<Link href={`/courses`} className="xl:flex hidden">
 					<p>Study Week</p>
 					<ArrowDropDownIcon />
-				</li>
+				</Link>
 			</ul>
 
 			<ul className="xl:flex items-center gap-2 xl:gap-7 hidden">

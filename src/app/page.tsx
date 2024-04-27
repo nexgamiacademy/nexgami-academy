@@ -57,7 +57,7 @@ export default function Home() {
 				</div>
 				<div className="cursor-pointer underline font-semibold text-primary my-3 text-end col-span-12 mr-4 xl:mr-20">Show All Courses</div>
 
-				<section className="flex flex-col gap-6 xl:flex-row justify-between mx-4 my-10 xl:mx-20 xl:my-20 bg-[#0C0E11] p-10 rounded-xl">
+				<section className="flex flex-col gap-6 xl:flex-row justify-between xl:items-center  mx-4 my-10 xl:mx-20 xl:my-20 bg-[#0C0E11] p-10 rounded-xl">
 					<div className="xl:w-[760px] flex flex-col gap-6">
 						<Typography variant="h5" fontWeight={700} lineHeight={1.25} className="text-3xl xl:text-5xl leading-snug">
 							Earn Crypto Through Learning about <span className="text-primary">NexGami</span>

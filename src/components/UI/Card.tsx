@@ -4,6 +4,7 @@ import DateNTime from '@/components/Shared/DateNTime';
 import Image from 'next/image';
 import { Button, Typography } from '@mui/material';
 import PrimaryButton from './PrimaryButton';
+import Link from 'next/link';
 
 const Card = ({ course }: any) => {
 	return (
@@ -25,7 +26,9 @@ const Card = ({ course }: any) => {
 
 				<DateNTime />
 
-				<PrimaryButton>Start Here</PrimaryButton>
+				<PrimaryButton>
+					<Link href={`/courses/1`}>Start Here</Link>
+				</PrimaryButton>
 			</div>
 		</div>
 	);
