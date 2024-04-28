@@ -6,7 +6,7 @@ interface Slug {
 	params: { id: string };
 }
 
-export const maxDuration = 300;
+export const maxDuration = 10;
 
 export async function GET(req: NextRequest, { params }: Slug) {
 	try {
