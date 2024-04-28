@@ -6,7 +6,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const getCourse = async (id: string) => {
 	try {
-		const res = await fetch(`http://localhost:3000/api/courses/${id}`, {
+		const res = await fetch(`https://nexgami-academy.vercel.app/api/courses/${id}`, {
 			cache: 'no-store',
 		});
 
