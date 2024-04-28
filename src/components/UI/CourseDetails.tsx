@@ -3,24 +3,26 @@ import Image from 'next/image';
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-const CoursePage = () => {
+
+const CourseDetails = ({ course }: any) => {
 	return (
-		<div className="px-4 xl:px-20 mb-20">
+		<div>
 			<div className="w-full flex items-center justify-center mt-10">
 				<iframe
 					width="850"
 					height="450"
 					className="rounded-lg"
-					src="https://www.youtube.com/embed/603_L_66ouI?si=iwaksQ1az-SPiMyA"
+					src={course?.videoURL}
+					// src={'https://res.cloudinary.com/ssani7/video/upload/v1661111983/samples/elephants.mp4'}
 					title="YouTube video player"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; control"
 					referrerPolicy="strict-origin-when-cross-origin"
 					allowFullScreen></iframe>
 			</div>
 
 			<div className="mt-8 flex flex-col gap-3">
 				<Typography variant="h4" fontWeight={700}>
-					What us NexGami and Web 3.0 gaming?
+					{course?.title}
 				</Typography>
 				<Typography variant="body1" color="lightgray" sx={{ wordWrap: 'break-word' }}>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis odio molestias natus soluta! Dolorem necessitatibus voluptatibus, sint non blanditiis vero excepturi qui, repellendus
@@ -41,19 +43,11 @@ const CoursePage = () => {
 
 				<div className="grid grid-cols-3 items-center justify-between w-full py-8">
 					<div className="flex items-center xl:justify-start justify-center gap-3 col-span-3 xl:col-span-1">
-						<Image
-							className="size-16 rounded-full object-cover object-top"
-							src={
-								'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?t=st=1714144624~exp=1714148224~hmac=28ba062408da3ee00b0b3b4b39683b8fd208febc58b4869563c3604343762442&w=1380'
-							}
-							height={300}
-							width={300}
-							alt={''}
-						/>
+						<Image className="size-16 rounded-full object-cover object-top" src={course?.instructor?.photoURL} height={300} width={300} alt={''} />
 
-						<div className="flex flex-col items-center gap-1">
+						<div className="flex flex-col gap-1">
 							<Typography variant="h6" fontWeight={700}>
-								Lauren Jones
+								{course?.instructor?.name}
 							</Typography>
 							<Typography variant="body1">Game Developer</Typography>
 						</div>
@@ -76,4 +70,4 @@ const CoursePage = () => {
 	);
 };
 
-export default CoursePage;
+export default CourseDetails;

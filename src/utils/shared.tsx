@@ -5,7 +5,7 @@ import courseImage4 from '@/Assets/course4.png';
 
 export const dummyCourses = [
 	{
-		id: 1,
+		id: 0,
 		title: 'What is NexGami?',
 		description: 'NexGami Course 1 Description',
 		image: courseImage,
@@ -13,7 +13,7 @@ export const dummyCourses = [
 		date: 'Dec 12, 2023',
 	},
 	{
-		id: 2,
+		id: 1,
 		title: 'What is Bitcoin ?',
 		description: 'NexGami Course 1 Description',
 		image: courseImage2,
@@ -21,7 +21,7 @@ export const dummyCourses = [
 		date: 'Dec 12, 2023',
 	},
 	{
-		id: 3,
+		id: 2,
 		title: 'What is Web3 ?',
 		description: 'NexGami Course 1 Description',
 		image: courseImage3,
@@ -29,7 +29,7 @@ export const dummyCourses = [
 		date: 'Dec 12, 2023',
 	},
 	{
-		id: 4,
+		id: 3,
 		title: 'What is Polkadot ?',
 		description: 'NexGami Course 1 Description',
 		image: courseImage4,

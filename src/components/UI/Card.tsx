@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const Card = ({ course }: any) => {
 	return (
-		<div key={course.id} className="rounded-md overflow-hidden flex flex-col w-full mx-auto">
+		<div className="rounded-md overflow-hidden flex flex-col w-full mx-auto">
 			<div className="w-full">
 				<Image className="w-full" src={course.image} alt="Course banner" />
 			</div>
@@ -27,7 +27,9 @@ const Card = ({ course }: any) => {
 				<DateNTime />
 
 				<PrimaryButton>
-					<Link href={`/courses/1`}>Start Here</Link>
+					<Link className="w-full" href={`/courses/${course.id}`}>
+						Start Here
+					</Link>
 				</PrimaryButton>
 			</div>
 		</div>

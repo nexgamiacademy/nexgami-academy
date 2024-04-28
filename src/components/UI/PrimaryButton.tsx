@@ -4,6 +4,7 @@ import React from 'react';
 const PrimaryButton = (props: any) => {
 	return (
 		<Button
+			{...props}
 			variant="contained"
 			sx={{
 				bgcolor: '#70E1FB',
@@ -13,7 +14,7 @@ const PrimaryButton = (props: any) => {
 				padding: '8px 18px',
 				marginTop: '16px',
 				// margin: '16px auto 0 auto',
-				// width: 'fit-content',
+				// width: '100%',
 
 				'&:hover': {
 					bgcolor: '#64c1d6',
