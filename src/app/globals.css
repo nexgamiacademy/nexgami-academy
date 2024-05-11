@@ -47,6 +47,70 @@
 	animation: hovering-center2 20s infinite;
 }
 
+.tiptap {
+	> * + * {
+		margin-top: 0.75em;
+	}
+
+	ul,
+	ol {
+		padding: 0 1rem;
+	}
+}
+
+.bubble-menu {
+	display: flex;
+	background-color: #0d0d0d;
+	padding: 0.2rem;
+	border-radius: 0.5rem;
+
+	button {
+		border: none;
+		background: none;
+		color: #fff;
+		font-size: 0.85rem;
+		font-weight: 500;
+		padding: 0 0.2rem;
+		opacity: 0.6;
+
+		&:hover,
+		&.is-active {
+			opacity: 1;
+		}
+	}
+}
+
+.floating-menu {
+	display: flex;
+	background-color: #0d0d0d10;
+	padding: 0.2rem;
+	border-radius: 0.5rem;
+
+	button {
+		border: none;
+		background: none;
+		font-size: 0.85rem;
+		font-weight: 500;
+		padding: 0 0.2rem;
+		opacity: 0.6;
+
+		&:hover,
+		&.is-active {
+			opacity: 1;
+		}
+	}
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+.tiptap a {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 @keyframes hovering {
 	0% {
 		top: -190px;
