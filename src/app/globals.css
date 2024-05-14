@@ -106,9 +106,15 @@ h1 {
 }
 
 .tiptap a {
-	color: blue;
+	color: #7bbfd3;
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.ProseMirror {
+	padding: 12px;
+	border: 1px solid;
+	min-height: 30vh;
 }
 
 @keyframes hovering {

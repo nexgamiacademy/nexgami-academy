@@ -1,6 +1,6 @@
 'use client';
 
-import { FormControlLabel, Switch, TextField, colors } from '@mui/material';
+import { Button, FormControlLabel, Switch, TextField, colors } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 
 import { Theme, ThemeProvider, createTheme, useTheme } from '@mui/material/styles';
@@ -28,7 +28,7 @@ const extensions = [
 	}),
 	Image.configure({
 		HTMLAttributes: {
-			class: 'max-w-[100%] mx-auto',
+			class: 'max-w-[100%] mx-auto my-5',
 		},
 	}),
 	Heading.configure({
@@ -87,7 +87,7 @@ const extensions = [
 		},
 	}),
 ];
-const content = '<p>Hello World!</p>';
+const content = '<p>Enter course content here...</p>';
 
 const customTheme = (outerTheme: Theme) =>
 	createTheme({
@@ -104,6 +104,14 @@ const customTheme = (outerTheme: Theme) =>
 						'& label.Mui-focused': {
 							color: '#fff',
 						},
+					},
+				},
+			},
+			MuiButton: {
+				styleOverrides: {
+					root: {
+						color: 'white',
+						textTransform: 'capitalize',
 					},
 				},
 			},
@@ -280,55 +288,55 @@ const UploadCourse = () => {
 						{editor && (
 							<>
 								<div className="flex gap-2">
-									<button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}>
 										H1
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}>
 										H2
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}>
 										H3
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().setTextAlign('left').run()} className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().setTextAlign('left').run()} className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}>
 										left
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().setTextAlign('center').run()} className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().setTextAlign('center').run()} className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}>
 										center
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().setTextAlign('right').run()} className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().setTextAlign('right').run()} className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}>
 										right
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
 										justify
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().unsetTextAlign().run()}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().unsetTextAlign().run()}>
 										unsetTextAlign
-									</button>
-									<button type="button" onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''}>
 										setLink
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().unsetLink().run()} disabled={!editor.isActive('link')}>
+									</Button>
+									{/* <Button variant="text" type="button" onClick={() => editor.chain().focus().unsetLink().run()} disabled={!editor.isActive('link')}>
 										unsetLink
-									</button>
-									<button type="button" onClick={addImage}>
+									</Button> */}
+									<Button variant="text" type="button" onClick={addImage}>
 										Image
-									</button>
+									</Button>
 								</div>
-								<EditorContent editor={editor} />
+								<EditorContent editor={editor} style={{ minHeight: '20vh' }} />
 								{/* <FloatingMenu editor={editor!}>This is the floating menu</FloatingMenu> */}
 								<BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-									<button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'is-active' : ''}>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'is-active' : ''}>
 										Bold
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'is-active' : ''}>
 										Italic
-									</button>
-									<button type="button" onClick={() => editor.chain().focus().toggleStrike().run()} className={editor.isActive('strike') ? 'is-active' : ''}>
+									</Button>
+									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleStrike().run()} className={editor.isActive('strike') ? 'is-active' : ''}>
 										Strike
-									</button>
-									<button type="button" onClick={addImage}>
+									</Button>
+									<Button variant="text" type="button" onClick={addImage}>
 										Image
-									</button>
+									</Button>
 								</BubbleMenu>
 							</>
 						)}
