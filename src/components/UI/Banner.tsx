@@ -1,12 +1,15 @@
+'use client';
+
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { CardActionArea, Divider, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Button, CardActionArea, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 import banner from '@/Assets/nexgami banner.png';
 import CustomButton from '@/components/CustomButton';
 import DifficultyChip from '../Shared/DifficultyChip';
 import DateNTime from '../Shared/DateNTime';
 import Link from 'next/link';
+import { fetchUserInfo, requestAuthorization } from '@/utils/auth';
 
 const Banner = () => {
 	return (

@@ -12,17 +12,10 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
+export default function GeneralLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body className={inter.className}>
-				<Navbar />
-				{children}
-			</body>
-		</html>
-	);
+	return <div>{children}</div>;
 }
