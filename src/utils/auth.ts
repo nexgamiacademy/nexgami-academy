@@ -1,6 +1,6 @@
 export const requestAuthorization = () => {
 	const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-	const redirectUri = encodeURIComponent(`${process.env.NEXT_PUBLIC_PORT || 'http://localhost:3000'}/api/auth/callback`);
+	const redirectUri = encodeURIComponent(`${process.env.NEXT_PUBLIC_PORT}/api/auth/callback`);
 	const responseType = 'code';
 	const scope = 'read_user_info';
 

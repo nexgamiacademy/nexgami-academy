@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { User } from '../../models/user';
 import connectDB from '@/libs/db';
-import mongoose, { Mongoose } from 'mongoose';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
+	const { searchParams } = new URL(request.url);
+	const code = searchParams.get('code');
 	try {
-		const { searchParams } = new URL(request.url);
-		const code = searchParams.get('code');
-
 		const clientId = '4bfca401000';
 		const clientSecret = 'YWYWNGEZNZCTNTG0OC0ZMDC2LTKYMMYTNTUZNJCWNTE1NWFK';
-		const redirectUri = encodeURIComponent('http://localhost:3000/api/auth/callback');
+		const redirectUri = encodeURIComponent(`${process.env.NEXT_PUBLIC_PORT}/api/auth/callback`);
 		const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 		const tokenResponse = await fetch(`https://auth.nexgami.com/oauth2/token?code=${code}&grant_type=authorization_code&redirect_uri=${redirectUri}&client_id=${clientId}`, {
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
 		console.log('🚀 ~ GET ~ error:', error);
 		const html = `
       <script>
-        window.opener.postMessage({ error: 'Failed to get access token' }, window.location.origin);
+        window.opener.postMessage(${JSON.stringify(error)}, window.location.origin);
         window.close();
       </script>
     `;

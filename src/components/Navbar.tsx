@@ -24,9 +24,11 @@ const Navbar = () => {
 		const handleMessage = async (event: any) => {
 			if (event.origin !== window.location.origin) return;
 			const data = event.data;
+			console.log('🚀 ~ handleMessage ~ data:', data);
 
 			if (data.access_token) {
 				const userInfo: any = await fetchUserInfo(data.access_token);
+				console.log('🚀 ~ handleMessage ~ userInfo:', userInfo);
 				localStorage.setItem('nexgAccessToken', data.access_token);
 				localStorage.setItem('nexgRefreshToken', data.refresh_token);
 
