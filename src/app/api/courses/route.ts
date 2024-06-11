@@ -1,0 +1,38 @@
+import connectDB from '@/libs/db';
+import mongoose from 'mongoose';
+import { NextRequest, NextResponse } from 'next/server';
+import { Course } from '../models/course';
+
+export async function POST(req: NextRequest) {
+	try {
+		const { title, body, videoURL, featured, authorName, instructorPhoto } = await req.json();
+		await connectDB();
+
+		// delete mongoose.connection.models.Course;
+
+		const result = await Course.create({
+			title: title,
+			body: body,
+			videoURL: videoURL,
+			featured: featured,
+			author: {
+				name: authorName,
+				photoURL: instructorPhoto,
+			},
+		});
+
+		console.log('response', result);
+
+		return NextResponse.json({
+			status: 'Success',
+			message: 'Saved new course successfully',
+			data: result,
+		});
+	} catch (error: any) {
+		console.error('error:', error);
+		return NextResponse.json({
+			status: 'Failed',
+			message: error.message,
+		});
+	}
+}

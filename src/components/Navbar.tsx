@@ -12,12 +12,11 @@ import { useUserContext } from '@/contexts/UserContext';
 import { fetchUserInfo, requestAuthorization } from '@/utils/auth';
 import PersonIcon from '@mui/icons-material/Person';
 import { MUITheme } from '@/utils/MUITheme';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
 	const { userData, loadingUser, setUserData, fetchUserData, signOut } = useUserContext();
-	console.log('🚀 ~ Navbar ~ loadingUser:', loadingUser);
-
-	console.log(userData);
+	const router = useRouter();
 
 	useEffect(() => {
 		fetchUserData();
@@ -96,7 +95,7 @@ const Navbar = () => {
 					</Link>
 				</ul>
 
-				<ul className="xl:flex items-center gap-2 xl:gap-7 hidden">
+				<ul className="xl:flex items-center gap-2 xl:gap-7 ">
 					{/* <li>
 					<IconButton>
 						<SearchIcon htmlColor="white" />
@@ -159,8 +158,11 @@ const Navbar = () => {
 											horizontal: 'right',
 										}}
 										open={Boolean(anchorEl)}
+										onClick={handleClose}
 										onClose={handleClose}>
 										{/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+										{userData?.userType == 'Admin' && <MenuItem onClick={() => router.push('/admin/upload/course')}>Upload Course</MenuItem>}
+
 										<MenuItem onClick={signOut}>Log Out</MenuItem>
 									</Menu>
 								</li>

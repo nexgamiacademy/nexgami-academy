@@ -6,7 +6,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const getCourse = async (id: string) => {
 	try {
-		const res = await fetch(`https://nexgami-academy.vercel.app/api/courses/${id}`, {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_PORT}/api/courses/${id}`, {
 			cache: 'no-store',
 		});
 
@@ -34,13 +34,18 @@ const CoursePage = async ({ params: { id } }: { params: { id: string } }) => {
 			courseId = '662e9bd71da6d7038bba2707';
 			break;
 	}
-	const resp = await getCourse(courseId);
+	const resp = await getCourse(id);
 
 	const course = resp?.data || {};
+	console.log('🚀 ~ CoursePage ~ course:', course);
+
+	const createMarkup = (html: string) => {
+		return { __html: html };
+	};
 
 	return (
 		<div className="px-4 xl:px-20 mb-20">
-			<div className="w-full flex items-center justify-center mt-10">
+			{/* <div className="w-full flex items-center justify-center mt-10">
 				<iframe
 					width="850"
 					height="450"
@@ -97,7 +102,8 @@ const CoursePage = async ({ params: { id } }: { params: { id: string } }) => {
 						Learn More About This Course
 					</Typography>
 				</div>
-			</div>
+			</div> */}
+			<div dangerouslySetInnerHTML={createMarkup(course.body)}></div>
 		</div>
 	);
 };

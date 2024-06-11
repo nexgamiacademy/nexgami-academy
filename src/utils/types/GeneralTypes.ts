@@ -6,4 +6,5 @@ export interface UserData {
 	email: String;
 	globalName: String;
 	usernames: String;
+	userType: 'Admin' | 'Author' | 'User';
 }

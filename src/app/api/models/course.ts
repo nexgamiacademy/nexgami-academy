@@ -2,26 +2,26 @@ import mongoose, { Schema } from 'mongoose';
 
 interface Instructor {
 	name: string;
-	photoURL: string;
+	photoURL?: string;
 }
 
 interface ICourse {
 	title: string;
-	description: string;
-	videoURL: string;
+	body: string;
+	videoURL?: string;
 	featured: boolean;
-	instructor: Instructor;
+	author: Instructor;
 }
 
 const courseSchema = new Schema<ICourse>(
 	{
 		title: { type: String, required: true },
-		description: { type: String, required: true },
-		videoURL: { type: String, required: true },
+		body: { type: String, required: true },
+		videoURL: { type: String, required: false },
 		featured: { type: Boolean, default: false },
-		instructor: {
+		author: {
 			name: { type: String, required: true },
-			photoURL: { type: String, required: true },
+			photoURL: { type: String, required: false },
 		},
 	},
 	{ timestamps: true }

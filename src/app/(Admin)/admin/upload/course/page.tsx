@@ -1,14 +1,13 @@
 'use client';
 
-import { Button, FormControlLabel, Switch, TextField, colors } from '@mui/material';
+import { Backdrop, Button, FormControlLabel, Switch, TextField, colors } from '@mui/material';
 import React, { useCallback, useState } from 'react';
-
 import { Theme, ThemeProvider, createTheme, useTheme } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import PrimaryButton from '@/components/UI/PrimaryButton';
 import { BubbleMenu, EditorContent, EditorProvider, FloatingMenu, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-
+import CircularProgress from '@mui/material/CircularProgress';
 import Document from '@tiptap/extension-document';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
@@ -18,6 +17,8 @@ import Heading from '@tiptap/extension-heading';
 import FileHandler from '@tiptap-pro/extension-file-handler';
 import TextAlign from '@tiptap/extension-text-align';
 import Link from '@tiptap/extension-link';
+import { useUserContext } from '@/contexts/UserContext';
+import { useRouter } from 'next/navigation';
 
 const extensions = [
 	StarterKit,
@@ -188,19 +189,11 @@ const customTheme = (outerTheme: Theme) =>
 
 const UploadCourse = () => {
 	const outerTheme = useTheme();
+	const { userData } = useUserContext();
 
-	// const [courseContent, setCourseContent] = useState('');
-	// console.log('🚀 ~ UploadCourse ~ courseContent:', courseContent);
-
-	// const save = (data) => {
-	// 	// console.log(data.getCurrentContent().getPlainText());
-	// 	console.log(stateToHTML(data.getCurrentContent()));
-	// };
-
-	// const getHTMLData = (value: Draft.DraftModel.ImmutableData.EditorState) => {
-	// 	// console.log(stateToHTML(value.getCurrentContent()));
-	// 	setCourseContent(stateToHTML(value.getCurrentContent()));
-	// };
+	const [title, setTitle] = useState<string>('');
+	const [featured, setFreatured] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const editor = useEditor({
 		extensions,
@@ -235,13 +228,41 @@ const UploadCourse = () => {
 		editor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
 	}, [editor]);
 
+	const router = useRouter();
+
 	console.log(editor?.getHTML());
+
+	const uploadCourse = async (event: any) => {
+		event.preventDefault();
+
+		setLoading(true);
+		try {
+			const resp = await fetch(`${process.env.NEXT_PUBLIC_PORT}/api/courses`, {
+				method: 'POST',
+				body: JSON.stringify({
+					title: title,
+					body: editor?.getHTML(),
+					featured: featured,
+					authorName: userData?.globalName,
+				}),
+			});
+
+			const data = await resp.json();
+			if (data?.data?._id) {
+				router.push(`/courses/${data.data._id}`);
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<ThemeProvider theme={customTheme(outerTheme)}>
 			<div className="px-10 py-10">
 				<p className="mb-5 font-semibold text-2xl">Create a new course</p>
-				<form action="">
+				<form action="" onSubmit={uploadCourse}>
 					<div className="flex flex-col gap-4 ">
 						<TextField
 							id="outlined-basic"
@@ -250,6 +271,7 @@ const UploadCourse = () => {
 							sx={{
 								width: '100%',
 							}}
+							onChange={(e) => setTitle(e.target.value)}
 						/>
 						<FormControlLabel
 							sx={{ width: 'fit-content' }}
@@ -260,6 +282,8 @@ const UploadCourse = () => {
 											bgcolor: '#fff',
 										},
 									}}
+									checked={featured}
+									onChange={(e) => setFreatured(e.target.checked)}
 								/>
 							}
 							label="Feature this course"
@@ -348,6 +372,9 @@ const UploadCourse = () => {
 						<div dangerouslySetInnerHTML={{ __html: editor?.getHTML() || '' }} />
 					</div>
 				</form>
+				<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
+					<CircularProgress color="inherit" />
+				</Backdrop>
 			</div>
 		</ThemeProvider>
 	);
