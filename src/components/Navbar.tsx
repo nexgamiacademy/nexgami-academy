@@ -163,7 +163,12 @@ const Navbar = () => {
 										onClick={handleClose}
 										onClose={handleClose}>
 										{/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-										{userData?.userType == 'Admin' && <MenuItem onClick={() => router.push('/admin/upload/course')}>Upload Course</MenuItem>}
+
+										{userData?.userType == 'Admin' && (
+											<MenuItem>
+												<Link href="/admin/upload/course">Upload Course</Link>
+											</MenuItem>
+										)}
 
 										<MenuItem onClick={signOut}>Log Out</MenuItem>
 									</Menu>

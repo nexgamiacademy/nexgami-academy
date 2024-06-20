@@ -11,8 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Document from '@tiptap/extension-document';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
-import Paragraph from '@tiptap/extension-paragraph';
-import Text from '@tiptap/extension-text';
+import Placeholder from '@tiptap/extension-placeholder';
 import Heading from '@tiptap/extension-heading';
 import FileHandler from '@tiptap-pro/extension-file-handler';
 import TextAlign from '@tiptap/extension-text-align';
@@ -37,6 +36,9 @@ const extensions = [
 	}),
 	TextAlign.configure({
 		types: ['heading', 'paragraph', 'image'],
+	}),
+	Placeholder.configure({
+		placeholder: 'Enter Course Content Here...',
 	}),
 	FileHandler.configure({
 		allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
@@ -88,7 +90,7 @@ const extensions = [
 		},
 	}),
 ];
-const content = '<p>Enter course content here...</p>';
+// const content = '<p>Enter course content here...</p>';
 
 const customTheme = (outerTheme: Theme) =>
 	createTheme({
@@ -197,7 +199,6 @@ const UploadCourse = () => {
 
 	const editor = useEditor({
 		extensions,
-		content,
 	});
 
 	const addImage = () => {
@@ -230,7 +231,7 @@ const UploadCourse = () => {
 
 	const router = useRouter();
 
-	console.log(editor?.getHTML());
+	console.log(editor?.getJSON());
 
 	const uploadCourse = async (event: any) => {
 		event.preventDefault();
@@ -346,7 +347,7 @@ const UploadCourse = () => {
 										Image
 									</Button>
 								</div>
-								<EditorContent editor={editor} style={{ minHeight: '20vh' }} />
+								<EditorContent placeholder="Enter Course Content " editor={editor} style={{ minHeight: '20vh' }} />
 								{/* <FloatingMenu editor={editor!}>This is the floating menu</FloatingMenu> */}
 								<BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
 									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'is-active' : ''}>
@@ -365,11 +366,13 @@ const UploadCourse = () => {
 							</>
 						)}
 
+						{editor?.getJSON().content && (editor.getJSON() as any)?.content[0]?.content && <p className="my-5 font-semibold text-2xl">Coures Preview</p>}
+
+						<div dangerouslySetInnerHTML={{ __html: editor?.getHTML() || '' }} />
+
 						<div className="mx-auto">
 							<PrimaryButton type="submit">Submit Course</PrimaryButton>
 						</div>
-
-						<div dangerouslySetInnerHTML={{ __html: editor?.getHTML() || '' }} />
 					</div>
 				</form>
 				<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>

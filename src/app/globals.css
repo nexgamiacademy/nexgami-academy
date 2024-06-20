@@ -117,6 +117,14 @@ h1 {
 	min-height: 30vh;
 }
 
+.tiptap p.is-editor-empty:first-child::before {
+	color: #adb5bd;
+	content: attr(data-placeholder);
+	float: left;
+	height: 0;
+	pointer-events: none;
+}
+
 @keyframes hovering {
 	0% {
 		top: -190px;
