@@ -125,6 +125,10 @@ h1 {
 	pointer-events: none;
 }
 
+svg circle {
+	transition: all 1s ease-in-out;
+}
+
 @keyframes hovering {
 	0% {
 		top: -190px;

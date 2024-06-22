@@ -1,29 +1,38 @@
 'use client';
 
 import { Box, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircularProgressWithLabel from '../CustomComponents/ProgrssWithLabel';
 
 const quizOptions = ['a', 'b', 'c', 'd'];
-const dummyOptions = ['Web3 Gaming Platform', 'Mobile Games From Future', 'Digital Game Store', 'Crypto Mining Scheme'];
 
-const Quiz = () => {
-	const [selected, setSelcted] = useState<number>();
+interface QuizQuestion {
+	_id: string;
+	question: string;
+	options: string[];
+}
+
+const Quiz = ({ timeLeft, quiz }: { timeLeft?: number; quiz: QuizQuestion }) => {
+	const [selected, setSelected] = useState<number | undefined>();
 
 	const handleSelect = (index: number) => {
-		if (index == selected) {
-			setSelcted(undefined);
+		if (selected == index) {
+			setSelected(undefined);
 		} else {
-			setSelcted(index);
+			setSelected(index);
 		}
 	};
+
+	useEffect(() => {
+		setSelected(undefined);
+	}, [quiz]);
 
 	return (
 		<div className="flex flex-col items-center gap-6">
 			<Typography variant="h4" fontWeight={700} align="center" sx={{ fontSize: { xs: '22px', lg: '2.125rem' } }}>
-				Which of the following best describes NexGami as an organization?
+				{quiz?.question}
 			</Typography>
-			<CircularProgressWithLabel value={35} />
+			<CircularProgressWithLabel value={timeLeft || 0} />
 			<div className="grid grid-cols-2 gap-8">
 				{quizOptions.map((option, index) => (
 					<Box
@@ -40,7 +49,7 @@ const Quiz = () => {
 						}}
 						onClick={() => handleSelect(index)}>
 						<Typography variant="body1" fontSize={20}>
-							({option}) {dummyOptions[index]}
+							({option}) {quiz?.options[index]}
 						</Typography>
 					</Box>
 				))}
