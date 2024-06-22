@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import { MUITheme } from '@/utils/MUITheme';
 import CircularProgressWithLabel from '@/components/CustomComponents/ProgrssWithLabel';
 import ResultProgress from '@/components/UI/ResultProgress';
+import Link from 'next/link';
 
 const quizQuestions = [
 	{
@@ -58,22 +59,22 @@ const style = {
 };
 
 const QuizPage = () => {
-	const [timeLeft, setTimeLeft] = useState(5);
+	const [timeLeft, setTimeLeft] = useState(10);
 	const [timeUp, setTimeUp] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [confirmFinish, setConfirmFinish] = useState(false);
 	const [showResult, setShowResult] = useState(false);
 
-	useEffect(() => {
-		if (timeLeft > 0) {
-			const timer = setInterval(() => {
-				setTimeLeft(timeLeft - 1);
-			}, 1000);
-			return () => clearInterval(timer);
-		} else {
-			setTimeUp(true);
-		}
-	}, [timeLeft]);
+	// useEffect(() => {
+	// 	if (timeLeft > 0) {
+	// 		const timer = setInterval(() => {
+	// 			setTimeLeft(timeLeft - 1);
+	// 		}, 1000);
+	// 		return () => clearInterval(timer);
+	// 	} else {
+	// 		setTimeUp(true);
+	// 	}
+	// }, [timeLeft]);
 
 	const allAnswered = currentIndex < quizQuestions.length - 1 ? false : true;
 
@@ -104,7 +105,12 @@ const QuizPage = () => {
 						</Typography>
 						<div className="w-[25vmin] mt-6">
 							{/* <CircularProgressWithLabel value={40} /> */}
-							<ResultProgress percentComplete={90} />
+							<ResultProgress rightAnswers={3} totalQuestions={3} />
+							<div className="flex justify-center mt-10">
+								<Link href={'/'}>
+									<Button variant="contained">Continue</Button>
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -115,15 +121,20 @@ const QuizPage = () => {
 	return (
 		<ThemeProvider theme={MUITheme}>
 			<div className="py-10 gameBg h-screen bg-[url('../../public/gameBg.png')] bg-cover bg-center">
-				<div className="flex w-full justify-center gap-2">
-					<Typography variant="h4" fontWeight={700} align="center">
-						Answer the questions Correctly to earn exciting rearwards
-					</Typography>
-					<Image src={gift} alt="" />
-				</div>
-
-				<QuizProgress />
-				{timeUp ? <p className="text-center">Timeup</p> : <Quiz quiz={quizQuestions[currentIndex]} timeLeft={timeLeft} />}
+				{timeUp ? (
+					<div>
+						<div className="flex w-full justify-center gap-2 mt-10">
+							<Typography variant="h4" fontWeight={700} align="center">
+								Your time is up!
+							</Typography>
+						</div>
+					</div>
+				) : (
+					<div>
+						<QuizProgress currentQuiz={currentIndex} quizesLength={quizQuestions?.length || 0} />
+						<Quiz quiz={quizQuestions[currentIndex]} timeLeft={timeLeft} />
+					</div>
+				)}
 
 				<div className="flex items-center justify-center mt-20">
 					<PrimaryButton onClick={handleNext}>{allAnswered || timeUp ? 'Finish Quiz' : 'Submit Answer'}</PrimaryButton>

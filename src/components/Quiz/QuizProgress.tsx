@@ -1,13 +1,11 @@
 import { Box, Divider } from '@mui/material';
 import React from 'react';
 
-const QuizProgress = () => {
-	const quizesLength = 10;
-	const currentQuiz = 5;
+const QuizProgress = ({ quizesLength, currentQuiz }: { quizesLength: number; currentQuiz: number }) => {
 	return (
 		<div className="flex items-start justify-center my-14">
-			{Array(10)
-				.fill(10)
+			{Array(quizesLength)
+				.fill(quizesLength)
 				.map((key, index) => (
 					<div key={index} className="flex items-center">
 						<Box
