@@ -73,7 +73,7 @@ export default async function Home() {
 
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 xl:gap-5 items-center justify-center w-full px-5 md:px-20 mt-14">
 							{latestCourses?.map((course: any) => (
-								<Card key={course.id} course={course} />
+								<Card key={course._id} course={course} />
 							))}
 						</div>
 						<div className="cursor-pointer underline font-semibold text-primary my-3 text-end col-span-12 mr-4 xl:mr-20">Show All Courses</div>
