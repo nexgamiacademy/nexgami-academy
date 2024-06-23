@@ -1,8 +1,9 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Link from 'next/link';
 
 const getCourse = async (id: string) => {
 	try {
@@ -45,7 +46,16 @@ const CoursePage = async ({ params: { id } }: { params: { id: string } }) => {
 	return (
 		<div className="px-4 xl:px-20 mb-20">
 			{course?.body ? (
-				<div dangerouslySetInnerHTML={createMarkup(course.body)}></div>
+				<div>
+					<div dangerouslySetInnerHTML={createMarkup(course.body)}></div>
+					<div className="flex items-center justify-center">
+						<Link href={`/quizes/${course._id}`}>
+							<Button variant="contained" sx={{ textTransform: 'capitalize' }}>
+								Try a quiz for this course?
+							</Button>
+						</Link>
+					</div>
+				</div>
 			) : (
 				<>
 					<div className="w-full flex items-center justify-center mt-10">

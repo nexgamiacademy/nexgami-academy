@@ -1,19 +1,22 @@
 import connectDB from '@/libs/db';
 import { NextRequest, NextResponse } from 'next/server';
-import { Course } from '../../models/course';
+import { Quiz } from '../../models/quiz';
+import mongoose, { ObjectId, Schema } from 'mongoose';
 
 interface Slug {
-	params: { id: string };
+	params: { courseId: string };
 }
 
 export const maxDuration = 10;
 
 export async function GET(req: NextRequest, { params }: Slug) {
 	try {
-		const { id } = params;
+		const { courseId } = params;
+		console.log('🚀 ~ GET ~ courseId:', courseId);
 		await connectDB();
 
-		const result = await Course.findById(id);
+		const courseObjectId = new mongoose.Types.ObjectId(courseId);
+		const result = await Quiz.find({ courseId: courseId });
 
 		console.log('response', result);
 

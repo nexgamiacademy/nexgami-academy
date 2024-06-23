@@ -10,10 +10,10 @@ import PrimaryButton from '@/components/UI/PrimaryButton';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { MUITheme } from '@/utils/MUITheme';
-import CircularProgressWithLabel from '@/components/CustomComponents/ProgrssWithLabel';
+import { MUITheme, ModalStyle } from '@/utils/MUITheme';
 import ResultProgress from '@/components/UI/ResultProgress';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 const quizQuestions = [
 	{
@@ -38,45 +38,46 @@ const quizQuestions = [
 	},
 ];
 
-const style = {
-	position: 'absolute' as 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	bgcolor: 'background.paper',
-	// border: '2px solid #000',
-	boxShadow: 24,
-	pt: 6,
-	px: 10,
-	pb: 4,
-	textAlign: 'center',
-	// width: '40%',
-	// height: '40vh',
-	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
-	justifyContent: 'center',
-};
-
 const QuizPage = () => {
 	const [timeLeft, setTimeLeft] = useState(10);
 	const [timeUp, setTimeUp] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [confirmFinish, setConfirmFinish] = useState(false);
 	const [showResult, setShowResult] = useState(false);
+	const [quizQuestions, setQuizQuestions] = useState([]);
 
-	// useEffect(() => {
-	// 	if (timeLeft > 0) {
-	// 		const timer = setInterval(() => {
-	// 			setTimeLeft(timeLeft - 1);
-	// 		}, 1000);
-	// 		return () => clearInterval(timer);
-	// 	} else {
-	// 		setTimeUp(true);
-	// 	}
-	// }, [timeLeft]);
+	const { id } = useParams();
+	console.log('🚀 ~ QuizPage ~ id:', id);
 
-	const allAnswered = currentIndex < quizQuestions.length - 1 ? false : true;
+	useEffect(() => {
+		const getQuizQuestions = async () => {
+			try {
+				const resp = await fetch(`${process.env.NEXT_PUBLIC_PORT}/api/quizes/${id}`);
+				const data = await resp.json();
+				console.log('🚀 ~ getQuizQuestions ~ data:', data);
+				setQuizQuestions(data.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		getQuizQuestions();
+	}, []);
+
+	useEffect(() => {
+		if (!quizQuestions?.length) return;
+
+		if (timeLeft > 0) {
+			const timer = setInterval(() => {
+				setTimeLeft(timeLeft - 1);
+			}, 1000);
+			return () => clearInterval(timer);
+		} else {
+			setTimeUp(true);
+		}
+	}, [timeLeft, quizQuestions?.length]);
+
+	const allAnswered = currentIndex < quizQuestions?.length - 1 ? false : true;
 
 	const handleNext = () => {
 		if (allAnswered || timeUp) {
@@ -120,7 +121,7 @@ const QuizPage = () => {
 
 	return (
 		<ThemeProvider theme={MUITheme}>
-			<div className="py-10 gameBg h-screen bg-[url('../../public/gameBg.png')] bg-cover bg-center">
+			<div className="xl:py-10 gameBg h-screen bg-[url('../../public/gameBg.png')] bg-cover bg-center">
 				{timeUp ? (
 					<div>
 						<div className="flex w-full justify-center gap-2 mt-10">
@@ -131,17 +132,23 @@ const QuizPage = () => {
 					</div>
 				) : (
 					<div>
-						<QuizProgress currentQuiz={currentIndex} quizesLength={quizQuestions?.length || 0} />
-						<Quiz quiz={quizQuestions[currentIndex]} timeLeft={timeLeft} />
+						{quizQuestions?.length ? (
+							<div>
+								<QuizProgress currentQuiz={currentIndex} quizesLength={quizQuestions?.length || 0} />
+								<Quiz quiz={quizQuestions[currentIndex]} timeLeft={timeLeft} />
+							</div>
+						) : (
+							<p className="text-center">Something went wrong</p>
+						)}
 					</div>
 				)}
 
-				<div className="flex items-center justify-center mt-20">
+				<div className="flex items-center justify-center mt-4 xl:mt-20">
 					<PrimaryButton onClick={handleNext}>{allAnswered || timeUp ? 'Finish Quiz' : 'Submit Answer'}</PrimaryButton>
 				</div>
 
 				<Modal open={confirmFinish} onClose={handleClose} aria-labelledby="parent-modal-title" aria-describedby="parent-modal-description">
-					<Box sx={{ ...style }}>
+					<Box sx={{ ...ModalStyle }}>
 						<h2 className="text-2xl font-bold">Are you sure to finish the quiz?</h2>
 						<p className="my-7">Your ansers wil be submitted for results and this action cannot be undone.</p>
 						<div className="flex gap-20">

@@ -12,6 +12,9 @@ const nextConfig = {
 				hostname: 'yt3.googleusercontent.com',
 				port: '',
 			},
+			{
+				hostname: 'i.ibb.co',
+			},
 		],
 	},
 };

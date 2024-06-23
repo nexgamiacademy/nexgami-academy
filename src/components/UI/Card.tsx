@@ -9,9 +9,7 @@ import Link from 'next/link';
 const Card = ({ course }: any) => {
 	return (
 		<div className="rounded-md overflow-hidden flex flex-col w-full mx-auto">
-			<div className="w-full">
-				<Image className="w-full" src={course.image} alt="Course banner" />
-			</div>
+			<div className="w-full">{course?.image && <Image className="w-full" src={course.image} height={300} width={300} alt="Course banner" />}</div>
 
 			<div className="flex flex-col gap-3 bg-[#2C2F35] bg-opacity-65 p-5">
 				<Typography variant="h6" fontWeight={700}>
@@ -20,14 +18,14 @@ const Card = ({ course }: any) => {
 
 				<DifficultyChip difficulty="Beginner" />
 
-				<Typography variant="body2" lineHeight={1.65} color={'lightgray'}>
+				{/* <Typography variant="body2" lineHeight={1.65} color={'lightgray'}>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias excepturi provident, quasi, quas unde magnam nemo ullam consequatur exercitationem..
-				</Typography>
+				</Typography> */}
 
-				<DateNTime />
+				<DateNTime dateStr={course.createdAt} />
 
 				<PrimaryButton>
-					<Link className="w-full" href={`/courses/${course.id}`}>
+					<Link className="w-full" href={`/courses/${course._id}`}>
 						Start Here
 					</Link>
 				</PrimaryButton>

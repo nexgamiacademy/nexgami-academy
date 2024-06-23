@@ -1,17 +1,18 @@
 import connectDB from '@/libs/db';
-import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 import { Course } from '../models/course';
+import mongoose from 'mongoose';
 
 export async function POST(req: NextRequest) {
 	try {
-		const { title, body, videoURL, featured, authorName, instructorPhoto } = await req.json();
+		const { title, image, body, videoURL, featured, authorName, instructorPhoto } = await req.json();
 		await connectDB();
 
-		// delete mongoose.connection.models.Course;
+		delete mongoose.connection.models.Course;
 
 		const result = await Course.create({
 			title: title,
+			image: image,
 			body: body,
 			videoURL: videoURL,
 			featured: featured,

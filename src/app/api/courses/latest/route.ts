@@ -8,12 +8,11 @@ interface Slug {
 
 export const maxDuration = 10;
 
-export async function GET(req: NextRequest, { params }: Slug) {
+export async function GET(req: NextRequest) {
 	try {
-		const { id } = params;
 		await connectDB();
 
-		const result = await Course.findById(id);
+		const result = await Course.find().sort({ createdAt: -1 }).limit(4);
 
 		console.log('response', result);
 

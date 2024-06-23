@@ -28,8 +28,8 @@ const Quiz = ({ timeLeft, quiz }: { timeLeft?: number; quiz: QuizQuestion }) => 
 	}, [quiz]);
 
 	return (
-		<div className="flex flex-col items-center gap-6">
-			<Typography variant="h4" fontWeight={700} align="center" sx={{ fontSize: { xs: '22px', lg: '2.125rem' } }}>
+		<div className="flex flex-col items-center gap-6 px-5">
+			<Typography variant="h4" fontWeight={700} align="center" sx={{ fontSize: { xs: '20px', lg: '2.125rem' } }}>
 				{quiz?.question}
 			</Typography>
 			<CircularProgressWithLabel value={timeLeft || 0} />
@@ -37,7 +37,7 @@ const Quiz = ({ timeLeft, quiz }: { timeLeft?: number; quiz: QuizQuestion }) => 
 				{quizOptions.map((option, index) => (
 					<Box
 						key={option}
-						className={`border ${index == selected ? 'border-primary bg-primary text-black' : 'border-white'} rounded-xl px-10 py-5 cursor-pointer col-span-2 xl:col-span-1`}
+						className={`border ${index == selected ? 'border-primary bg-primary text-black' : 'border-white'} rounded-xl p-4 xl:px-10 xl:py-5 cursor-pointer col-span-2 xl:col-span-1`}
 						sx={{
 							boxShadow: '0 0 10px white',
 							'&:hover': {
@@ -48,7 +48,7 @@ const Quiz = ({ timeLeft, quiz }: { timeLeft?: number; quiz: QuizQuestion }) => 
 							},
 						}}
 						onClick={() => handleSelect(index)}>
-						<Typography variant="body1" fontSize={20}>
+						<Typography variant="body1" sx={{ fontSize: { xs: '16px', lg: '1.5rem' } }}>
 							({option}) {quiz?.options[index]}
 						</Typography>
 					</Box>

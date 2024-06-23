@@ -1,14 +1,13 @@
 'use client';
 
-import { Backdrop, Button, FormControlLabel, Switch, TextField, colors } from '@mui/material';
+import { Backdrop, Box, Button, FormControlLabel, Modal, Switch, TextField, colors } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { Theme, ThemeProvider, createTheme, useTheme } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import PrimaryButton from '@/components/UI/PrimaryButton';
-import { BubbleMenu, EditorContent, EditorProvider, FloatingMenu, useEditor } from '@tiptap/react';
+import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import CircularProgress from '@mui/material/CircularProgress';
-import Document from '@tiptap/extension-document';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -18,6 +17,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import Link from '@tiptap/extension-link';
 import { useUserContext } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
+import { ModalStyle } from '@/utils/MUITheme';
 
 const extensions = [
 	StarterKit,
@@ -194,8 +194,11 @@ const UploadCourse = () => {
 	const { userData } = useUserContext();
 
 	const [title, setTitle] = useState<string>('');
+	const [image, setImage] = useState<string>('');
+	const [courseId, setCouseId] = useState<string>('');
 	const [featured, setFreatured] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [quizModal, setQuizModal] = useState<boolean>(false);
 
 	const editor = useEditor({
 		extensions,
@@ -231,8 +234,6 @@ const UploadCourse = () => {
 
 	const router = useRouter();
 
-	console.log(editor?.getJSON());
-
 	const uploadCourse = async (event: any) => {
 		event.preventDefault();
 
@@ -242,6 +243,7 @@ const UploadCourse = () => {
 				method: 'POST',
 				body: JSON.stringify({
 					title: title,
+					image: image,
 					body: editor?.getHTML(),
 					featured: featured,
 					authorName: userData?.globalName,
@@ -250,13 +252,19 @@ const UploadCourse = () => {
 
 			const data = await resp.json();
 			if (data?.data?._id) {
-				router.push(`/courses/${data.data._id}`);
+				// router.push(`/courses/${data.data._id}`);
+				setCouseId(data.data._id);
+				setQuizModal(true);
 			}
 		} catch (error) {
 			console.log(error);
 		} finally {
 			setLoading(false);
 		}
+	};
+
+	const handleClose = () => {
+		setQuizModal(false);
 	};
 
 	return (
@@ -273,6 +281,15 @@ const UploadCourse = () => {
 								width: '100%',
 							}}
 							onChange={(e) => setTitle(e.target.value)}
+						/>
+						<TextField
+							id="outlined-basic"
+							label="Course Banner URL"
+							variant="outlined"
+							sx={{
+								width: '100%',
+							}}
+							onChange={(e) => setImage(e.target.value)}
 						/>
 						<FormControlLabel
 							sx={{ width: 'fit-content' }}
@@ -375,9 +392,28 @@ const UploadCourse = () => {
 						</div>
 					</div>
 				</form>
+
+				{/* loading spinner */}
 				<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
 					<CircularProgress color="inherit" />
 				</Backdrop>
+
+				<Modal open={quizModal} onClose={handleClose} aria-labelledby="parent-modal-title" aria-describedby="parent-modal-description">
+					<Box sx={{ ...ModalStyle }}>
+						<h2 className="text-2xl font-bold">Do you want to upload a quiz for this course?</h2>
+						<p className="my-7">
+							You can create a quiz for this course for the users to complete. To do so please click <strong>Upload Quiz</strong> button
+						</p>
+						<div className="flex gap-20">
+							<Button variant="outlined" color="error" style={{ textTransform: 'capitalize' }} onClick={handleClose}>
+								Cancel
+							</Button>
+							<Button variant="outlined" color="success" style={{ textTransform: 'capitalize' }} onClick={() => router.push(`/admin/upload/quiz/${courseId}`)}>
+								Finish Quiz
+							</Button>
+						</div>
+					</Box>
+				</Modal>
 			</div>
 		</ThemeProvider>
 	);

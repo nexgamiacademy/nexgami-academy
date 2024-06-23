@@ -3,7 +3,7 @@ import React from 'react';
 
 const QuizProgress = ({ quizesLength, currentQuiz }: { quizesLength: number; currentQuiz: number }) => {
 	return (
-		<div className="flex items-start justify-center my-14">
+		<div className="flex items-start justify-center py-5 xl:py-14">
 			{Array(quizesLength)
 				.fill(quizesLength)
 				.map((key, index) => (

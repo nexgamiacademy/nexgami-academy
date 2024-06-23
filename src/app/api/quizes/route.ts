@@ -1,25 +1,22 @@
 import connectDB from '@/libs/db';
 import { NextRequest, NextResponse } from 'next/server';
-import { Course } from '../../models/course';
+import { Quiz } from '../models/quiz';
+import mongoose from 'mongoose';
 
-interface Slug {
-	params: { id: string };
-}
-
-export const maxDuration = 10;
-
-export async function GET(req: NextRequest, { params }: Slug) {
+export async function POST(req: NextRequest) {
 	try {
-		const { id } = params;
+		const { quizes } = await req.json();
 		await connectDB();
 
-		const result = await Course.findById(id);
+		// delete mongoose.connection.models.Quiz;
+
+		const result = await Quiz.insertMany(quizes);
 
 		console.log('response', result);
 
 		return NextResponse.json({
 			status: 'Success',
-			// message: 'Saved new course successfully',
+			message: 'Saved new course successfully',
 			data: result,
 		});
 	} catch (error: any) {

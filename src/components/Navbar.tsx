@@ -4,8 +4,6 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import logo from '@/Assets/NexgamiLogo.png';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import SearchIcon from '@mui/icons-material/Search';
-import LanguageIcon from '@mui/icons-material/Language';
 import { Button, IconButton, Menu, MenuItem, Skeleton, ThemeProvider } from '@mui/material';
 import Link from 'next/link';
 import { useUserContext } from '@/contexts/UserContext';
@@ -24,11 +22,9 @@ const Navbar = () => {
 		const handleMessage = async (event: any) => {
 			if (event.origin !== window.location.origin) return;
 			const data = event.data;
-			console.log('🚀 ~ handleMessage ~ data:', data);
 
 			if (data.access_token) {
 				const userInfo: any = await fetchUserInfo(data.access_token);
-				console.log('🚀 ~ handleMessage ~ userInfo:', userInfo);
 				localStorage.setItem('nexgAccessToken', data.access_token);
 				localStorage.setItem('nexgRefreshToken', data.refresh_token);
 
