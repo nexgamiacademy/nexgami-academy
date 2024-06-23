@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 		const { title, image, body, videoURL, featured, authorName, instructorPhoto } = await req.json();
 		await connectDB();
 
-		delete mongoose.connection.models.Course;
+		// delete mongoose.connection.models.Course;
 
 		const result = await Course.create({
 			title: title,
