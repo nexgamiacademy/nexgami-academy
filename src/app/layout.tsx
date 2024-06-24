@@ -26,7 +26,7 @@ export default function RootLayout({
 		<html lang="en">
 			<UserProvider>
 				<MUIThemeProvider>
-					<body className={inter.className} style={{ minHeight: '100vh' }}>
+					<body className={inter.className} style={{ minHeight: '100vh', position: 'relative' }}>
 						<Navbar />
 						{children}
 						<Toaster />

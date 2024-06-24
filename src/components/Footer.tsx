@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const Footer = () => {
 	return (
-		<div className="bg-base-200 w-full flex flex-col gap-5 py-10 mt-10  ">
+		<div className="bg-base-200 w-full flex flex-col gap-5 py-10 mt-10  absolute -bottom-56">
 			<Typography variant="h5" align="center">
 				Follow Us
 			</Typography>
