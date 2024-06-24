@@ -1,4 +1,5 @@
 import { User } from '@/app/api/models/user';
+import mongoose from 'mongoose';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest, { params }: { params: { accessToken: string } }) {
@@ -13,6 +14,7 @@ export async function GET(request: NextRequest, { params }: { params: { accessTo
 		});
 
 		const nexgUser = await response.json();
+		// delete mongoose.connection.models.User;
 
 		if (nexgUser?.userId) {
 			const userResp = await User.findOne({ userId: nexgUser.userId });

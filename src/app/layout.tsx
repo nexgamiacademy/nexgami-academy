@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { UserProvider } from '@/contexts/UserContext';
 import Navbar from '@/components/Navbar';
+import { Toaster } from 'react-hot-toast';
+import Footer from '@/components/Footer';
+import MUIThemeProvider from '@/components/MUIThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,10 +25,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<UserProvider>
-				<body className={inter.className}>
-					<Navbar />
-					{children}
-				</body>
+				<MUIThemeProvider>
+					<body className={inter.className} style={{ minHeight: '100vh' }}>
+						<Navbar />
+						{children}
+						<Toaster />
+						<Footer />
+					</body>
+				</MUIThemeProvider>
 			</UserProvider>
 		</html>
 	);

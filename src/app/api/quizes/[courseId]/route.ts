@@ -12,10 +12,8 @@ export const maxDuration = 10;
 export async function GET(req: NextRequest, { params }: Slug) {
 	try {
 		const { courseId } = params;
-		console.log('🚀 ~ GET ~ courseId:', courseId);
 		await connectDB();
 
-		const courseObjectId = new mongoose.Types.ObjectId(courseId);
 		const result = await Quiz.find({ courseId: courseId });
 
 		console.log('response', result);

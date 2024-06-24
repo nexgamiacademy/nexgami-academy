@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
 			});
 
 			const userData = await userResp.json();
-			console.log('🚀 ~ GET ~ userData:', userData);
+			// console.log('🚀 ~ GET ~ userData:', userData);
 			await connectDB();
 			await User.findOneAndUpdate({ userId: userData.userId }, userData, { upsert: true });
 

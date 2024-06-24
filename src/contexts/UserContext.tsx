@@ -8,15 +8,16 @@ import { ReactNode, createContext, useContext, useState } from 'react';
 interface UserContextValue {
 	userData?: Partial<UserData>;
 	userType?: UserType;
-	loadingUser?: boolean;
+	loadingUser: boolean;
 	setUserData?: (user: UserData) => void;
 	fetchUserData: () => void;
 	signOut: () => void;
+	courseTaken?: string[];
 }
 
 type UserType = 'Admin' | 'Author' | 'User';
 
-const UserContext = createContext<UserContextValue>({ fetchUserData: () => {}, signOut: () => {} });
+const UserContext = createContext<UserContextValue>({ fetchUserData: () => {}, signOut: () => {}, loadingUser: true });
 
 export function useUserContext() {
 	return useContext(UserContext);

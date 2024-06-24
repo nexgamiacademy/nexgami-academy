@@ -6,6 +6,8 @@ interface IUser {
 	globalName: string;
 	email: string;
 	userType: 'Admin' | 'Author' | 'User';
+	points: number;
+	courseTaken: string[];
 }
 
 const userSchema = new Schema<IUser>(
@@ -15,6 +17,8 @@ const userSchema = new Schema<IUser>(
 		globalName: { type: String, required: true },
 		email: { type: String, required: true },
 		userType: { type: String, required: true },
+		points: { type: Number, default: 0 },
+		courseTaken: { type: [String], required: false, default: [] },
 	},
 	{ timestamps: true }
 );

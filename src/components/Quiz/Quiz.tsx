@@ -12,7 +12,7 @@ interface QuizQuestion {
 	options: string[];
 }
 
-const Quiz = ({ timeLeft, quiz }: { timeLeft?: number; quiz: QuizQuestion }) => {
+const Quiz = ({ timeLeft, quiz, setAnswers }: { timeLeft?: number; quiz: QuizQuestion; setAnswers: (_anser: any) => void }) => {
 	const [selected, setSelected] = useState<number | undefined>();
 
 	const handleSelect = (index: number) => {
@@ -20,6 +20,7 @@ const Quiz = ({ timeLeft, quiz }: { timeLeft?: number; quiz: QuizQuestion }) => 
 			setSelected(undefined);
 		} else {
 			setSelected(index);
+			setAnswers((prev: any) => [...prev, index]);
 		}
 	};
 

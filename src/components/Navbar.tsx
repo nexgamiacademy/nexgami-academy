@@ -4,13 +4,15 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import logo from '@/Assets/NexgamiLogo.png';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Button, IconButton, Menu, MenuItem, Skeleton, ThemeProvider } from '@mui/material';
+import { Button, IconButton, Menu, MenuItem, Skeleton, ThemeProvider, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useUserContext } from '@/contexts/UserContext';
 import { fetchUserInfo, requestAuthorization } from '@/utils/auth';
 import PersonIcon from '@mui/icons-material/Person';
 import { MUITheme } from '@/utils/MUITheme';
 import { useRouter } from 'next/navigation';
+import { IoIosGift } from 'react-icons/io';
+import gift from '@/Assets/gift.png';
 
 const Navbar = () => {
 	const { userData, loadingUser, setUserData, fetchUserData, signOut } = useUserContext();
@@ -123,7 +125,7 @@ const Navbar = () => {
 									</Button>
 								</li>
 							) : (
-								<li>
+								<li className="flex items-center">
 									{/* <Button
 									size="small"
 									variant="contained"
@@ -134,6 +136,15 @@ const Navbar = () => {
 									onClick={signOut}>
 									Sign Out
 								</Button> */}
+									<div className="flex items-center gap-1 mr-3">
+										{/* <IoIosGift /> */}
+										<Image src={gift} className="size-6" alt="earn exciting rewards" />
+
+										<Typography variant="body2" fontWeight={700} color="#7bbfd3">
+											{userData?.points} Points
+										</Typography>
+									</div>
+
 									<IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
 										<PersonIcon />
 									</IconButton>

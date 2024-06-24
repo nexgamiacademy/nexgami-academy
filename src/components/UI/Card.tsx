@@ -8,10 +8,10 @@ import Link from 'next/link';
 
 const Card = ({ course }: any) => {
 	return (
-		<div className="rounded-md overflow-hidden flex flex-col w-full mx-auto">
+		<div className="rounded-md overflow-hidden flex flex-col w-full h-full mx-auto">
 			<div className="w-full">{course?.image && <Image className="w-full" src={course.image} height={300} width={300} alt="Course banner" />}</div>
 
-			<div className="flex flex-col gap-3 bg-[#2C2F35] bg-opacity-65 p-5">
+			<div className="flex flex-col gap-3 bg-[#2C2F35] bg-opacity-65 p-5 h-full">
 				<Typography variant="h6" fontWeight={700}>
 					{course.title}
 				</Typography>
@@ -24,7 +24,7 @@ const Card = ({ course }: any) => {
 
 				<DateNTime dateStr={course.createdAt} />
 
-				<PrimaryButton>
+				<PrimaryButton className="mt-auto">
 					<Link className="w-full" href={`/courses/${course._id}`}>
 						Start Here
 					</Link>

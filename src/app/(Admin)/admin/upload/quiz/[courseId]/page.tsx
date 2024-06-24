@@ -1,11 +1,12 @@
 'use client';
 import { MUITheme } from '@/utils/MUITheme';
 import { Backdrop, Button, CircularProgress, TextField, ThemeProvider, Typography } from '@mui/material';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import toast from 'react-hot-toast';
 
 interface Quiz {
 	courseId: string;
@@ -62,6 +63,8 @@ const UploadQuiz = () => {
 		// setValue((event.target as HTMLInputElement).value);
 	};
 
+	const router = useRouter();
+
 	const handleSubmit = async () => {
 		const reqBody = {
 			quizes: quizes,
@@ -77,13 +80,14 @@ const UploadQuiz = () => {
 
 			const data = await resp.json();
 			console.log('🚀 ~ handleSubmit ~ data:', data);
-			// if (data?.data?._id) {
-			// 	// router.push(`/courses/${data.data._id}`);
-			// 	setCouseId(data.data._id);
-			// 	setQuizModal(true);
-			// }
-		} catch (error) {
+			if (data?.status === 'Success') {
+				router.push(`/courses/${courseId}`);
+			} else {
+				toast.error(data?.message || 'Something went wrong');
+			}
+		} catch (error: any) {
 			console.log(error);
+			toast.error(error?.message || 'Something went wrong');
 		} finally {
 			setLoading(false);
 		}

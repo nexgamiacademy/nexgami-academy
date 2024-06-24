@@ -10,7 +10,25 @@ import DifficultyChip from '@/components/Shared/DifficultyChip';
 import { dummyCourses } from '@/utils/shared';
 import Link from 'next/link';
 
-const CoursesPage = () => {
+async function getData() {
+	const res = await fetch(`${process.env.NEXT_PUBLIC_PORT}/api/courses/latest`, { cache: 'no-store' });
+	const data = await res.json();
+
+	if (!res.ok) {
+		// This will activate the closest `error.js` Error Boundary
+		throw new Error('Failed to fetch data');
+	}
+
+	return data.data;
+}
+
+const CoursesPage = async () => {
+	let latestCourses = [];
+	try {
+		latestCourses = await getData();
+	} catch (error) {
+		console.log(error);
+	}
 	return (
 		<div className="px-6 xl:px-0 pt-6 xl:pt-0">
 			<section className="flex items-center justify-around xl:py-16 xl:px-20 w-full">
@@ -41,23 +59,23 @@ const CoursesPage = () => {
 				<div className="blobCenter2"></div>
 
 				<div className="flex flex-col gap-4">
-					{dummyCourses.map((course) => (
+					{latestCourses?.map((course: any) => (
 						<div key={course.id} className="flex flex-col xl:flex-row rounded-lg overflow-hidden xl:max-h-[350px] w-full col-span-8">
-							<Image className="h-[350px] w-[520px]" src={course.image} alt="" />
+							<Image className="h-[350px] w-[520px]" height={300} width={300} src={course.image} alt="" />
 
 							<div className="bg-[#2C2F35] bg-opacity-65 flex flex-col justify-center p-5 gap-2 xl:gap-4 xl:pl-12 xl:pr-8 xl:rounded-r-lg w-full">
 								<Typography variant="h4" fontWeight={700} sx={{ fontSize: { xs: '22px', lg: '2.125rem' } }}>
 									{course.title}
 								</Typography>
 								<Typography variant="body1" color="lightgray" lineHeight={1.65}>
-									CyberConnect is a decentralized social network that addresses the challenges of centralized social media by offering a self-sovereign and interoperabl…{' '}
+									{course.desc}
 								</Typography>
 								<div className="my-2">
-									<DateNTime />
+									<DateNTime dateStr={course.createdAt} />
 								</div>
 								<DifficultyChip difficulty="Intermediate" variant="bgless" color="white" />
 								<div>
-									<Link href={'/quizes/1'}>
+									<Link href={`/courses/${course._id}`}>
 										<PrimaryButton>Start Learning</PrimaryButton>
 									</Link>
 								</div>

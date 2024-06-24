@@ -5,6 +5,7 @@ import Card from '@/components/UI/Card';
 import Image from 'next/image';
 import DifficultyChip from '@/components/Shared/DifficultyChip';
 import CoursesGrid from '@/components/CoursesGrid';
+import Link from 'next/link';
 
 const keywords = [
 	'Altcoin',
@@ -49,7 +50,7 @@ export default async function Home() {
 		console.log(error);
 	}
 
-	console.log('🚀 ~ Home ~ latestCourses:', latestCourses);
+	// console.log('🚀 ~ Home ~ latestCourses:', latestCourses);
 	return (
 		<main className="text-white relative overflow-hidden">
 			{/* blob on background top right */}
@@ -59,7 +60,7 @@ export default async function Home() {
 
 			{/* latest Relase */}
 			<section className="mt-20 py-10 relative">
-				{latestCourses.length && (
+				{latestCourses.length ? (
 					<div>
 						<Typography variant="h4" fontWeight={700} align="center">
 							Latest Releases
@@ -76,8 +77,12 @@ export default async function Home() {
 								<Card key={course._id} course={course} />
 							))}
 						</div>
-						<div className="cursor-pointer underline font-semibold text-primary my-3 text-end col-span-12 mr-4 xl:mr-20">Show All Courses</div>
+						<Link href={`/courses`}>
+							<div className="cursor-pointer underline font-semibold text-primary my-3 text-end col-span-12 mr-4 xl:mr-20">Show All Courses</div>
+						</Link>
 					</div>
+				) : (
+					''
 				)}
 
 				<section className="flex flex-col gap-6 xl:flex-row justify-between xl:items-center  mx-4 my-10 xl:mx-20 xl:my-20 bg-[#0C0E11] p-10 rounded-xl">

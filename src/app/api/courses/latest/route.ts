@@ -7,14 +7,13 @@ interface Slug {
 }
 
 export const maxDuration = 10;
+export const revalidate = 0;
 
 export async function GET(req: NextRequest) {
 	try {
 		await connectDB();
 
 		const result = await Course.find().sort({ createdAt: -1 }).limit(4);
-
-		console.log('response', result);
 
 		return NextResponse.json({
 			status: 'Success',

@@ -272,7 +272,7 @@ const UploadCourse = () => {
 			<div className="px-10 py-10">
 				<p className="mb-5 font-semibold text-2xl">Create a new course</p>
 				<form action="" onSubmit={uploadCourse}>
-					<div className="flex flex-col gap-4 ">
+					<div className="flex flex-col gap-4 course-content">
 						<TextField
 							id="outlined-basic"
 							label="Course Title"
@@ -405,11 +405,11 @@ const UploadCourse = () => {
 							You can create a quiz for this course for the users to complete. To do so please click <strong>Upload Quiz</strong> button
 						</p>
 						<div className="flex gap-20">
-							<Button variant="outlined" color="error" style={{ textTransform: 'capitalize' }} onClick={handleClose}>
+							<Button variant="outlined" color="error" style={{ textTransform: 'capitalize' }} onClick={() => router.push('/')}>
 								Cancel
 							</Button>
 							<Button variant="outlined" color="success" style={{ textTransform: 'capitalize' }} onClick={() => router.push(`/admin/upload/quiz/${courseId}`)}>
-								Finish Quiz
+								Upload Quiz
 							</Button>
 						</div>
 					</Box>

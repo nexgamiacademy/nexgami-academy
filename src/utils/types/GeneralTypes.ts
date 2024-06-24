@@ -7,4 +7,6 @@ export interface UserData {
 	globalName: String;
 	usernames: String;
 	userType: 'Admin' | 'Author' | 'User';
+	courseTaken: string[];
+	points: number;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const DateNTime = ({ dateStr }: { dateStr?: string }) => {
-	const date = new Date(dateStr || '');
+	const date = dateStr ? new Date(dateStr) : new Date();
 
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
 	const formattedDate = date.toLocaleDateString('en-US', options as any);
