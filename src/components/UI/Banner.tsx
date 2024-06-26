@@ -29,7 +29,7 @@ const Banner = () => {
 					Your one-stop guide to all things crypto. Whether you're a rookie trying to understand mining or a veteran looking to develop a trading strategy, we've got you covered.
 				</Typography>
 				<CustomButton variant="contained">
-					<Link href={`/courses`}>Start Here</Link>
+					<Link href={`/courses/6679c419ffb79a83ab0ba883`}>Start Here</Link>
 				</CustomButton>
 			</div>
 
