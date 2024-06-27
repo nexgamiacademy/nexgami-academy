@@ -29,11 +29,11 @@ const Banner = () => {
 					Your one-stop guide to all things crypto. Whether you're a rookie trying to understand mining or a veteran looking to develop a trading strategy, we've got you covered.
 				</Typography>
 				<CustomButton variant="contained">
-					<Link href={`/courses/6679c419ffb79a83ab0ba883`}>Start Here</Link>
+					<Link href={`/courses`}>Start Here</Link>
 				</CustomButton>
 			</div>
 
-			<Link href={`/courses/1`}>
+			<Link href={`/courses/6679c419ffb79a83ab0ba883`}>
 				<CardActionArea sx={{ padding: '20px', borderRadius: '8px' }}>
 					<Image src={banner} alt="Nexgami Banner" />
 					<div className="flex flex-col gap-4">

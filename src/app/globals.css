@@ -10,6 +10,7 @@ h5,
 h6 {
 	line-height: 1.5;
 	margin-top: 0.75em;
+	font-weight: bold;
 }
 
 .course-content a {

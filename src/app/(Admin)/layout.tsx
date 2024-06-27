@@ -1,3 +1,4 @@
+import RequireAdmin from '@/components/Auth/RequireAdmin';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,5 +14,9 @@ export default function AdminLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return <div>{children}</div>;
+	return (
+		<div>
+			<RequireAdmin>{children}</RequireAdmin>
+		</div>
+	);
 }
