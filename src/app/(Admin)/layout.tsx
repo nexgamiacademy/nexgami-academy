@@ -5,7 +5,7 @@ export const metadata: Metadata = {
 	title: 'NexGami Academy',
 	description: 'Nintendo doing Web3',
 	icons: {
-		icon: '/NexGamiLogo.png',
+		icon: '/nexg_academy_banner.jpg',
 	},
 };
 
