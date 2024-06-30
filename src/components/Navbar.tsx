@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import logo from '@/Assets/NexgamiLogo.png';
+import logo from '@/Assets/NexGamiLogo.png';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Button, IconButton, Menu, MenuItem, Skeleton, ThemeProvider, Typography } from '@mui/material';
 import Link from 'next/link';
@@ -63,11 +63,11 @@ const Navbar = () => {
 				<ul className="flex items-center gap-8">
 					<Link href={'/'}>
 						<li className="flex items-center gap-2">
-							<Image className="h-10 w-10" src={logo} alt="NexGami" />
-							<div className="flex flex-col text-sm leading-4">
+							<Image className="w-16" src={logo} alt="NexGami Academy" />
+							{/* <div className="flex flex-col text-sm leading-4">
 								<p>NexGami</p>
 								<p className="pl-2">Academy</p>
-							</div>
+							</div> */}
 						</li>
 					</Link>
 

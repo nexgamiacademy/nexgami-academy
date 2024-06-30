@@ -5,24 +5,24 @@ import mongoose from 'mongoose';
 
 export async function POST(req: NextRequest) {
 	try {
-		const { title, image, body, videoURL, featured, authorName, instructorPhoto } = await req.json();
+		const { title, image, body, videoURL, featured, authorName, instructorPhoto, category, difficulty } = await req.json();
 		await connectDB();
 
-		// delete mongoose.connection.models.Course;
+		// delete (mongoose.connection as any).models.Course;
 
 		const result = await Course.create({
 			title: title,
 			image: image,
 			body: body,
 			videoURL: videoURL,
+			category: category,
+			difficulty: difficulty,
 			featured: featured,
 			author: {
 				name: authorName,
 				photoURL: instructorPhoto,
 			},
 		});
-
-		console.log('response', result);
 
 		return NextResponse.json({
 			status: 'Success',

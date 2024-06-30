@@ -18,6 +18,9 @@ import Link from '@tiptap/extension-link';
 import { useUserContext } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
 import { ModalStyle } from '@/utils/MUITheme';
+import DifficultyChip from '@/components/Shared/DifficultyChip';
+import { difficulties } from '@/utils/utils';
+import DifficultyChipOutlined from '@/components/Shared/DifficultyOutlined';
 
 const extensions = [
 	StarterKit,
@@ -197,6 +200,8 @@ const UploadCourse = () => {
 	const [image, setImage] = useState<string>('');
 	const [courseId, setCouseId] = useState<string>('');
 	const [featured, setFreatured] = useState<boolean>(false);
+	const [selectedDif, setSelectedDif] = useState<string>('beginner');
+	const [category, setCategory] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 	const [quizModal, setQuizModal] = useState<boolean>(false);
 
@@ -210,6 +215,10 @@ const UploadCourse = () => {
 		if (url && editor) {
 			editor.chain().focus().setImage({ src: url }).run();
 		}
+	};
+
+	const handleDiff = (diff: string) => {
+		setSelectedDif(diff);
 	};
 
 	const setLink = useCallback(() => {
@@ -246,6 +255,8 @@ const UploadCourse = () => {
 					image: image,
 					body: editor?.getHTML(),
 					featured: featured,
+					difficulty: selectedDif,
+					category: category,
 					authorName: userData?.globalName,
 				}),
 			});
@@ -282,15 +293,36 @@ const UploadCourse = () => {
 							}}
 							onChange={(e) => setTitle(e.target.value)}
 						/>
-						<TextField
-							id="outlined-basic"
-							label="Course Banner URL"
-							variant="outlined"
-							sx={{
-								width: '100%',
-							}}
-							onChange={(e) => setImage(e.target.value)}
-						/>
+						<div className="flex flex-col xl:flex-row gap-2">
+							<TextField
+								id="outlined-basic"
+								label="Course Banner URL"
+								variant="outlined"
+								sx={{
+									width: '100%',
+								}}
+								onChange={(e) => setImage(e.target.value)}
+							/>
+							<TextField
+								id="outlined-basic"
+								label="Course Category"
+								variant="outlined"
+								sx={{
+									width: '100%',
+								}}
+								onChange={(e) => setCategory(e.target.value)}
+							/>
+						</div>
+						<div className="flex items-start xl:items-center gap-5 mt-7">
+							<p className="text-nowrap">Difficuly :</p>
+							<div className="flex flex-wrap items-center gap-3">
+								{difficulties.map((difficulty: any) => (
+									<div key={difficulty} onClick={() => handleDiff(difficulty)}>
+										<DifficultyChipOutlined difficulty={difficulty} selected={selectedDif == difficulty} />
+									</div>
+								))}
+							</div>
+						</div>
 						<FormControlLabel
 							sx={{ width: 'fit-content' }}
 							control={
@@ -329,7 +361,7 @@ const UploadCourse = () => {
 
 						{editor && (
 							<>
-								<div className="flex gap-2">
+								<div className="flex gap-2 flex-wrap">
 									<Button variant="text" type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}>
 										H1
 									</Button>

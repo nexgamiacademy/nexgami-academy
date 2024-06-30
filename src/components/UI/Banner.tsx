@@ -39,7 +39,7 @@ const Banner = () => {
 					<div className="flex flex-col gap-4">
 						<p>How to Read the Most Popular Crypto Candlestick Patterns</p>
 						<DateNTime />
-						<DifficultyChip difficulty="Beginner" />
+						<DifficultyChip difficulty="beginner" />
 					</div>
 				</CardActionArea>
 			</Link>

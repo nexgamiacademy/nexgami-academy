@@ -7,29 +7,6 @@ import DifficultyChip from '@/components/Shared/DifficultyChip';
 import CoursesGrid from '@/components/CoursesGrid';
 import Link from 'next/link';
 
-const keywords = [
-	'Altcoin',
-	'bicoin',
-	'NexGami',
-	'Blockchain',
-	'Community',
-	'Consensus',
-	'CryptoCureency',
-	'Ethereum',
-	'DeFi',
-	'Crypto',
-	'Essential',
-	'History',
-	'Metaverse',
-	'Mining',
-	'NFT',
-	'Minting',
-	'Security',
-	'Privacy',
-	'Personal Finance',
-	'Utility',
-];
-
 async function getData() {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_PORT}/api/courses/latest`, { cache: 'no-store' });
 	const data = await res.json();
@@ -60,7 +37,7 @@ export default async function Home() {
 
 			{/* latest Relase */}
 			<section className="mt-20 py-10 relative">
-				{latestCourses.length ? (
+				{latestCourses?.length ? (
 					<div>
 						<Typography variant="h4" fontWeight={700} align="center">
 							Latest Releases
@@ -73,7 +50,7 @@ export default async function Home() {
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 xl:gap-5 items-center justify-center w-full px-5 md:px-20 mt-14">
-							{latestCourses?.map((course: any) => (
+							{latestCourses?.slice(0, 8).map((course: any) => (
 								<Card key={course._id} course={course} />
 							))}
 						</div>
@@ -95,28 +72,6 @@ export default async function Home() {
 						</Typography>
 					</div>
 					<Image src={rewardBanner} alt="earn exciting rewards" />
-				</section>
-
-				<section className="mx-4 xl:m-20">
-					<div className="flex items-start gap-5">
-						<p className="text-nowrap">Topics :</p>
-						<div className="flex flex-wrap gap-3">
-							{keywords.map((keyword) => (
-								<Button variant="outlined" color="inherit" size="small" className="" key={keyword}>
-									{keyword}
-								</Button>
-							))}
-						</div>
-					</div>
-
-					<div className="flex items-start xl:items-center gap-5 mt-7">
-						<p className="text-nowrap">Difficuly :</p>
-						<div className="flex flex-wrap items-center gap-3">
-							{['Beginner', 'Intermediate', 'Advanced'].map((difficulty: any) => (
-								<DifficultyChip difficulty={difficulty} variant="contained" key={difficulty} />
-							))}
-						</div>
-					</div>
 				</section>
 
 				<CoursesGrid />

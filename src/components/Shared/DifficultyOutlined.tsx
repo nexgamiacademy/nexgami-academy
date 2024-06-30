@@ -1,8 +1,10 @@
 import React from 'react';
 import Dot from '@mui/icons-material/FiberManualRecord';
 import { Box, Typography } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
+import AddIcon from '@mui/icons-material/Add';
 
-const DifficultyChip = ({ difficulty, variant, color }: { difficulty: 'beginner' | 'intermediate' | 'advanced'; variant?: 'bgless' | 'contained'; color?: string }) => {
+const DifficultyChipOutlined = ({ difficulty, selected, color }: { difficulty: 'beginner' | 'intermediate' | 'advanced'; selected: boolean; color?: string }) => {
 	let bgColor = '#D5EADD';
 	let dotColor = '#7AC997';
 
@@ -26,18 +28,22 @@ const DifficultyChip = ({ difficulty, variant, color }: { difficulty: 'beginner'
 				display: 'flex',
 				alignItems: 'center',
 				gap: '4px',
-				padding: variant == 'bgless' ? '0' : '6px 12px',
+				padding: '6px 12px',
 				borderRadius: '6px',
-				color: color ?? '#000',
-				backgroundColor: variant == 'bgless' ? 'transparent' : bgColor,
+				color: selected ? '#000' : 'white',
+				backgroundColor: selected ? bgColor : 'transparent',
+				border: '1px solid',
+				borderColor: selected ? 'transparent' : bgColor,
 				width: 'fit-content',
+				cursor: 'pointer',
 			}}>
 			<Dot htmlColor={dotColor} sx={{ width: '14px', height: '14px', marginBottom: '2px', color: dotColor }} />
 			<Typography variant="caption" textTransform="capitalize">
 				{difficulty}
 			</Typography>
+			{selected ? <CheckIcon sx={{ color: 'black' }} fontSize="small" /> : <AddIcon fontSize="small" />}
 		</Box>
 	);
 };
 
-export default DifficultyChip;
+export default DifficultyChipOutlined;

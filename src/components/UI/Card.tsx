@@ -16,7 +16,7 @@ const Card = ({ course }: any) => {
 					{course.title}
 				</Typography>
 
-				<DifficultyChip difficulty="Beginner" />
+				<DifficultyChip difficulty={course.difficulty || 'beginner'} />
 
 				{/* <Typography variant="body2" lineHeight={1.65} color={'lightgray'}>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias excepturi provident, quasi, quas unde magnam nemo ullam consequatur exercitationem..
