@@ -3,7 +3,7 @@ import { Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 import banner from '@/Assets/nexgami banner.png';
-import logo from '@/Assets/NexgamiLogo.png';
+import logo from '@/Assets/nexgami banner.png';
 import PrimaryButton from '@/components/UI/PrimaryButton';
 import DateNTime from '@/components/Shared/DateNTime';
 import DifficultyChip from '@/components/Shared/DifficultyChip';
@@ -48,7 +48,7 @@ const CoursesPage = async () => {
 					</Link>
 				</div>
 
-				<div className="hidden xl:inline-block">
+				<div className="hidden xl:inline-block max-w-[40%]">
 					<Image src={logo} alt="Nexgami Banner" />
 				</div>
 			</section>
@@ -73,7 +73,7 @@ const CoursesPage = async () => {
 								<div className="my-2">
 									<DateNTime dateStr={course.createdAt} />
 								</div>
-								<DifficultyChip difficulty="Intermediate" variant="bgless" color="white" />
+								<DifficultyChip difficulty="intermediate" variant="bgless" color="white" />
 								<div>
 									<Link href={`/courses/${course._id}`}>
 										<PrimaryButton>Start Learning</PrimaryButton>
