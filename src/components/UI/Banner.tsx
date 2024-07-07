@@ -33,7 +33,7 @@ const Banner = () => {
 				</CustomButton>
 			</div>
 
-			<Link href={`/courses/6679c419ffb79a83ab0ba883`}>
+			<Link href={`/courses/668ac1f4bea53d5f1dc516bc`}>
 				<CardActionArea sx={{ padding: '20px', borderRadius: '8px' }}>
 					<Image src={banner} alt="Nexgami Banner" />
 					<div className="flex flex-col gap-4">
