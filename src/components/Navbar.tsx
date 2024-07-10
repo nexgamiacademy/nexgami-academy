@@ -89,10 +89,13 @@ const Navbar = () => {
 						<p>Partnership</p>
 						<ArrowDropDownIcon />
 					</Link>
-					<Link href={`/courses`} className="xl:flex hidden">
+					{/* <Link href={`/courses`} className="xl:flex hidden">
 						<p>Study Week</p>
 						<ArrowDropDownIcon />
-					</Link>
+					</Link> */}
+					<a href={`https://www.nexgami.com/`} target="_blank" className="xl:flex hidden">
+						<p>NexGami</p>
+					</a>
 				</ul>
 
 				<ul className="xl:flex items-center gap-2 xl:gap-7 ">
